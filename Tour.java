@@ -97,8 +97,8 @@ import edu.princeton.cs.algs4.StdOut;
     }
 
     // insere p usando a heurística do vizinho mais próximo
-    public void insertNearest(Point p) {
-        Node newNode = new Node();
+    public void insertNearest(Point p) { 
+        Node newNode = new Node(); 
         newNode.p = p;
 
         if (start.p == null) {
@@ -139,15 +139,14 @@ import edu.princeton.cs.algs4.StdOut;
         double minIncrease = Double.POSITIVE_INFINITY; 
 
         Node current = start;
-        do {
-            double currentDist = current.p.distanceTo(p) + p.distanceTo(current.next.p)
-                                - current.p.distanceTo(current.next.p);
+        while (current != start) {
+            double currentDist = current.p.distanceTo(p) + p.distanceTo(current.next.p) - current.p.distanceTo(current.next.p);
             if (currentDist < minIncrease) {
                 minIncrease = currentDist;
                 best = current;
             }
             current = current.next;
-        } while (current != start);
+        }
 
         newNode.next = best.next;
         best.next = newNode;

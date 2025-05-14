@@ -10,18 +10,41 @@ Horas para completar o trabalho (opcional):
 Q1. Explique como você implementou a heurística de inserção pelo vizinho mais próximo.
 Comente também como você atualiza as ligações da lista encadeada circular após inserir o novo ponto.
 
-
-Resposta:
+Resposta: 
+Implementamos a heurística de inserção pelo vizinho mais próximo da seguinte maneira:
+O código começa buscando entre todos os pontos já inseridos no tour, aquele que está mais próximo do novo ponto a ser adicionado. 
+Começando do ponto inicial, percorremos a lista encadeada circular comparando as distâncias entre o novo 
+ponto e cada ponto do tour. O ponto com a menor distância é armazenado como o "mais próximo", e ao final da 
+busca o novo ponto é inserido logo após ele na lista. Para atualizar a lista encadeada circular, o novo nó 
+tem seu ponteiro next direcionado para o próximo nó do ponto mais próximo encontrado. Em seguida, o ponteiro 
+next do ponto mais próximo é ajustado para apontar para o novo nó. Isso garante que a estrutura continue circular 
+e que o novo ponto seja corretamente incluído no percurso.
 
 Q2. Explique como você implementou a heurística de menor aumento.
 Liste apenas as diferenças em relação à heurística de inserção pelo vizinho mais próximo.
 
-Resposta:
+Resposta: 
+Implementamos a heurística de menor aumento da seguinte maneira: 
+O código começa percorrendo todas as arestas do tour (de cada ponto para o próximo) 
+e calculando quanto a distância total aumentaria se o novo ponto fosse inserido entre eles. Para cada par de pontos 
+consecutivos, usamos a fórmula: dist(a, p) + dist(p, b) - dist(a, b), isso representa o custo adicional de inserir 
+p entre a e b. O ponto é então inserido no local onde esse aumento é o menor possível, mantendo a estrutura circular da 
+lista encadeada. Diferente da heurística do vizinho mais próximo, que apenas encontra o ponto já existente mais próximo 
+do novo e insere p depois dele, a heurística do menor aumento analisa todas as posições possíveis no tour e escolhe aquela 
+que menos impacta a distância total, mesmo que o ponto inserido não esteja próximo de nenhum dos anteriores. Isso torna o 
+resultado geralmente mais eficiente, pois considera o impacto global da inserção em vez de uma decisão local baseada apenas na proximidade.
 
 Q3. Explique por que é melhor usar uma lista encadeada circular em vez de um vetor.
 Considere a complexidade das operações de inserção e remoção de pontos.
 
 Resposta:
+A lista encadeada circular é melhor que um vetor nesse contexto porque permite inserir e remover pontos do tour com 
+complexidade constante O(1), desde que tenhamos a referência do nó anterior. Em uma lista encadeada, basta ajustar os ponteiros 
+(next) para incluir ou excluir um ponto, sem necessidade de deslocar os demais elementos. Já com um vetor (array), inserir ou remover 
+um ponto exige deslocar todos os elementos à frente ou atrás da posição afetada, resultando em complexidade O(n) no pior caso. 
+Isso torna o uso de vetor ineficiente para aplicações como o TSP, onde inserções frequentes são feitas em posições intermediárias. 
+Além disso, a lista circular facilita a navegação contínua pelo tour, já que o último elemento aponta de volta para o primeiro, eliminando 
+verificações extras de fim de lista.
 
 Q4. Preencha os comprimentos calculados pelas suas heurísticas.
 
