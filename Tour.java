@@ -139,14 +139,14 @@ import edu.princeton.cs.algs4.StdOut;
         double minIncrease = Double.POSITIVE_INFINITY; 
 
         Node current = start;
-        while (current != start) {
+        do {
             double currentDist = current.p.distanceTo(p) + p.distanceTo(current.next.p) - current.p.distanceTo(current.next.p);
             if (currentDist < minIncrease) {
                 minIncrease = currentDist;
                 best = current;
             }
             current = current.next;
-        }
+        } while (current != start);
 
         newNode.next = best.next;
         best.next = newNode;
